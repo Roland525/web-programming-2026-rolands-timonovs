@@ -14,11 +14,15 @@ const projectCards = document.querySelectorAll(".project-card");
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const selectedFilter = button.dataset.filter;
-    filterButtons.forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
+    filterButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("bg-slate-100", isActive);
+      item.classList.toggle("text-[#172033]", isActive);
+      item.classList.toggle("text-[#6c7485]", !isActive);
+    });
     projectCards.forEach((card) => {
       const shouldShow = selectedFilter === "all" || card.dataset.status === selectedFilter;
-      card.classList.toggle("is-hidden", !shouldShow);
+      card.classList.toggle("hidden", !shouldShow);
     });
   });
 });
