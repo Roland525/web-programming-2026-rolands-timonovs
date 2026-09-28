@@ -1,38 +1,33 @@
 # Individuālā refleksija
 
-Aizpildiet šo daļu individuāli nodarbības beigās, **neizmantojot mākslīgā intelekta rīkus**.
-
-Ieteicamais kopējais apjoms: **aptuveni 200–300 vārdi**.
-
----
-
 ## 1. Ko deva tipi?
 
-Savā formulējumā paskaidrojiet, kāda ir atšķirība starp JavaScript un TypeScript.
+JavaScript gandrīz nepārbauda tipus, bet TypeScript palīdz agrāk pamanīt kļūdas.
 
-Aprakstiet **vienu konkrētu kļūdu**, ko TypeScript jums parādīja šī darba laikā. Ko kods darīja nepareizi, un kā jūs to izlabojāt?
-
----
+Piemēram, man bija problēma ar `progress`. Ja vērtība bija tukša, tā pārvērtās par `0`, lai gan tā nevajadzētu notikt. Es izlaboju vērtības pārbaudi.
 
 ## 2. `null` un `querySelector`
 
-Kāpēc TypeScript uzskata, ka `document.querySelector(...)` rezultāts var būt `null`?
+`querySelector` var atgriezt `null`, jo vajadzīgais elements var nebūt HTML dokumentā.
 
-Parādiet, kā jūs šo gadījumu apstrādājāt savā kodā, un paskaidrojiet, kāpēc izvēlējāties tieši šo veidu.
+Tāpēc es izveidoju pārbaudi:
 
----
+```typescript
+if (!projectGrid) return;
+```
+
+Ja elements nav atrasts, kods tālāk netiek izpildīts. Tādā veidā programma neapstājas ar kļūdu.
 
 ## 3. Dati no ārpuses
 
-`localStorage` saturu var izmainīt jebkurš lietotājs caur DevTools.
+`localStorage` datiem nevar pilnībā uzticēties, jo lietotājs tos var izmainīt, izmantojot DevTools. Tāpēc pēc `JSON.parse` es papildus pārbaudu datus ar funkciju `isProject`.
 
-Paskaidrojiet:
+Lietotāja tekstu ir drošāk pievienot ar `textContent`, nevis `innerHTML`.
 
-- kāpēc `JSON.parse` rezultātam nevar vienkārši uzticēties, pat ja kodā tam ir norādīts tips;
-- kāpēc lietotāja tekstu nedrīkst ievietot lapā ar `innerHTML`.
-
----
+Piemēram, ja lietotājs ieraksta `<b>test</b>`, tad ar `textContent` tas tiks parādīts kā parasts teksts. Izmantojot `innerHTML`, pārlūkprogramma to var uztvert kā HTML kodu.
 
 ## 4. Jūsu vērtējums
 
-Aprakstiet vienu situāciju, kurā TypeScript, jūsuprāt, ir lieks, un vienu, kurā bez tā būtu grūti iztikt. Pamatojiet.
+Manuprāt, TypeScript nav nepieciešams ļoti mazam skriptam, kurā ir tikai dažas koda rindas un gandrīz nav datu.
+
+Tomēr projektā ar formām, daudzām funkcijām un dažādiem datu tipiem TypeScript ir noderīgs. Tas palīdz ātrāk atrast kļūdas un labāk saprast, kādi dati tiek izmantoti kodā.
