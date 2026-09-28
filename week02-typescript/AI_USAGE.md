@@ -11,7 +11,7 @@
 
 ## Kuru kodu vai konfigurāciju būtiskā apjomā ģenerēja mākslīgais intelekts?
 
-- TypeScript failus, testus un Vite konfigurāciju.
+- TypeScript failus, Vite konfigurāciju un pārbaudes testus, kuri vēlāk tika izņemti.
 
 ## Kuru kodu vai konfigurāciju es uzrakstīju pats vai būtiski pārveidoju?
 

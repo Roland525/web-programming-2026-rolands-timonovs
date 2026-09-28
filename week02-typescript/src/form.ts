@@ -8,7 +8,13 @@ export interface ProjectFormValues {
   progress: string;
 }
 
-export type FormErrors = Partial<Record<keyof ProjectFormValues, string>>;
+export interface FormErrors {
+  title?: string;
+  description?: string;
+  category?: string;
+  dueDate?: string;
+  progress?: string;
+}
 
 export function isCategory(value: string): value is Category {
   return value === "Frontend"
@@ -37,7 +43,12 @@ export function validateProject(values: ProjectFormValues): FormErrors {
     errors.dueDate = "Choose a due date";
   }
 
-  if (!Number.isInteger(progress) || progress < 0 || progress > 100) {
+  if (
+    values.progress.trim() === ""
+    || !Number.isInteger(progress)
+    || progress < 0
+    || progress > 100
+  ) {
     errors.progress = "Progress must be a whole number from 0 to 100";
   }
 

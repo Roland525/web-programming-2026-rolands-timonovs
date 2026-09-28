@@ -1,12 +1,34 @@
 import "./style.css";
 
-import { filterProjects, isProjectFilter, setupNavigation } from "./app";
 import { deadlines, startingProjects } from "./data";
 import { createProject, validateProject } from "./form";
 import type { FormErrors, ProjectFormValues } from "./form";
 import { renderDeadlines, renderProjects } from "./render";
 import { loadProjects, saveProjects } from "./storage";
-import type { ProjectFilter } from "./types";
+import type { Project, ProjectFilter } from "./types";
+
+function filterProjects(projects: Project[], filter: ProjectFilter): Project[] {
+  if (filter === "all") return projects;
+  return projects.filter((project) => project.status === filter);
+}
+
+function isProjectFilter(value: string | undefined): value is ProjectFilter {
+  return value === "all" || value === "active" || value === "done";
+}
+
+function setupNavigation(
+  menuButton: HTMLButtonElement | null,
+  mainNav: HTMLElement | null,
+): void {
+  if (!menuButton || !mainNav) return;
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = mainNav.classList.contains("hidden");
+    mainNav.classList.toggle("hidden", !isOpen);
+    mainNav.classList.toggle("flex", isOpen);
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+}
 
 const projectGrid = document.querySelector<HTMLElement>("#projectGrid");
 const deadlineList = document.querySelector<HTMLElement>("#deadlineList");
@@ -20,17 +42,14 @@ const descriptionInput = document.querySelector<HTMLTextAreaElement>("#projectDe
 const categoryInput = document.querySelector<HTMLSelectElement>("#projectCategory");
 const dueDateInput = document.querySelector<HTMLInputElement>("#projectDueDate");
 const progressInput = document.querySelector<HTMLInputElement>("#projectProgress");
+const titleError = document.querySelector<HTMLElement>('[data-error="title"]');
+const descriptionError = document.querySelector<HTMLElement>('[data-error="description"]');
+const categoryError = document.querySelector<HTMLElement>('[data-error="category"]');
+const dueDateError = document.querySelector<HTMLElement>('[data-error="dueDate"]');
+const progressError = document.querySelector<HTMLElement>('[data-error="progress"]');
 
 let selectedFilter: ProjectFilter = "all";
 let projects = loadProjects(localStorage, startingProjects);
-
-const formFields: (keyof ProjectFormValues)[] = [
-  "title",
-  "description",
-  "category",
-  "dueDate",
-  "progress",
-];
 
 function updateProjects(): void {
   if (!projectGrid) return;
@@ -54,10 +73,11 @@ function updateFilterButtons(): void {
 }
 
 function showFormErrors(errors: FormErrors): void {
-  formFields.forEach((field) => {
-    const message = document.querySelector<HTMLElement>(`[data-error="${field}"]`);
-    if (message) message.textContent = errors[field] ?? "";
-  });
+  if (titleError) titleError.textContent = errors.title ?? "";
+  if (descriptionError) descriptionError.textContent = errors.description ?? "";
+  if (categoryError) categoryError.textContent = errors.category ?? "";
+  if (dueDateError) dueDateError.textContent = errors.dueDate ?? "";
+  if (progressError) progressError.textContent = errors.progress ?? "";
 }
 
 updateProjects();

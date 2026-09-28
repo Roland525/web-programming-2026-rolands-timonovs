@@ -94,10 +94,11 @@ export function renderProjects(container: HTMLElement, projects: Project[]): voi
     );
 
     const progressBar = makeElement("div", "h-[7px] overflow-hidden rounded-full bg-[#eceef4]");
-    const progress = makeElement(
-      "div",
-      `h-full rounded-full ${project.status === "done" ? "bg-[#1ca76f]" : "bg-[#6d5dfc]"}`,
-    );
+    let progressColor = "bg-[#6d5dfc]";
+    if (project.category === "API") progressColor = "bg-[#3788ff]";
+    if (project.status === "done") progressColor = "bg-[#1ca76f]";
+
+    const progress = makeElement("div", `h-full rounded-full ${progressColor}`);
     progress.style.width = `${project.progress}%`;
     progressBar.append(progress);
 

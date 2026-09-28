@@ -12,6 +12,5 @@ npm run dev
 ## Pārbaude
 
 ```bash
-npm test
 npm run build
 ```

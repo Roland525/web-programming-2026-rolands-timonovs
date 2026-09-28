@@ -1,28 +1,17 @@
-import type { Category, Project, ProjectStatus } from "./types";
+import type { Project } from "./types";
 
 const storageKey = "campusflow-projects";
-
-function isCategory(value: unknown): value is Category {
-  return value === "Frontend"
-    || value === "API"
-    || value === "JavaScript"
-    || value === "Design";
-}
-
-function isStatus(value: unknown): value is ProjectStatus {
-  return value === "active" || value === "done";
-}
 
 export function isProject(value: unknown): value is Project {
   if (typeof value !== "object" || value === null) return false;
 
-  const project = value as Record<string, unknown>;
+  const project = value as Project;
 
   return typeof project.id === "string"
     && typeof project.title === "string"
     && typeof project.description === "string"
-    && isCategory(project.category)
-    && isStatus(project.status)
+    && ["Frontend", "API", "JavaScript", "Design"].includes(project.category)
+    && ["active", "done"].includes(project.status)
     && typeof project.dueDate === "string"
     && typeof project.progress === "number"
     && Number.isInteger(project.progress)
