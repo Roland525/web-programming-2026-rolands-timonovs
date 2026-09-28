@@ -180,6 +180,59 @@
       </div>
     </section>
 
+    <section class="mx-auto w-full max-w-[1220px] px-[14px] py-[34px] pb-4 sm:px-5" id="addProject">
+      <div class="rounded-[18px] border border-[#e5e9f2] bg-white p-6 shadow-sm">
+        <div class="mb-6">
+          <p class="mb-2.5 text-[11px] font-extrabold tracking-[0.14em] text-[#6d5dfc]">NEW PROJECT</p>
+          <h2 class="text-[28px] font-bold tracking-[-0.035em]">Add a project</h2>
+        </div>
+
+        <form class="grid gap-5 md:grid-cols-2" id="projectForm" novalidate>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold" for="projectTitle">Title</label>
+            <input class="w-full rounded-xl border border-[#d5d9e6] px-3 py-2.5 text-sm outline-none focus:border-[#6d5dfc]" id="projectTitle" name="title" type="text" />
+            <p class="mt-1 min-h-5 text-xs text-[#c64444]" data-error="title"></p>
+          </div>
+
+          <div>
+            <label class="mb-1.5 block text-sm font-bold" for="projectCategory">Category</label>
+            <select class="w-full rounded-xl border border-[#d5d9e6] bg-white px-3 py-2.5 text-sm outline-none focus:border-[#6d5dfc]" id="projectCategory" name="category">
+              <option value="">Choose a category</option>
+              <option value="Frontend">Frontend</option>
+              <option value="API">API</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Design">Design</option>
+            </select>
+            <p class="mt-1 min-h-5 text-xs text-[#c64444]" data-error="category"></p>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="mb-1.5 block text-sm font-bold" for="projectDescription">Description</label>
+            <textarea class="min-h-24 w-full resize-y rounded-xl border border-[#d5d9e6] px-3 py-2.5 text-sm outline-none focus:border-[#6d5dfc]" id="projectDescription" name="description"></textarea>
+            <p class="mt-1 min-h-5 text-xs text-[#c64444]" data-error="description"></p>
+          </div>
+
+          <div>
+            <label class="mb-1.5 block text-sm font-bold" for="projectDueDate">Due date</label>
+            <input class="w-full rounded-xl border border-[#d5d9e6] px-3 py-2.5 text-sm outline-none focus:border-[#6d5dfc]" id="projectDueDate" name="dueDate" type="date" />
+            <p class="mt-1 min-h-5 text-xs text-[#c64444]" data-error="dueDate"></p>
+          </div>
+
+          <div>
+            <label class="mb-1.5 block text-sm font-bold" for="projectProgress">Progress (0–100%)</label>
+            <input class="w-full rounded-xl border border-[#d5d9e6] px-3 py-2.5 text-sm outline-none focus:border-[#6d5dfc]" id="projectProgress" name="progress" type="number" min="0" max="100" step="1" value="0" />
+            <p class="mt-1 min-h-5 text-xs text-[#c64444]" data-error="progress"></p>
+          </div>
+
+          <div class="md:col-span-2">
+            <button class="inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl bg-[#6d5dfc] px-[18px] text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#5547df] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d5dfc]" type="submit">
+              Add project
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <section class="mx-auto w-full max-w-[1220px] px-[14px] pt-[34px] sm:px-5" id="weeklyStatus">
       <div class="flex items-start gap-3 rounded-xl border border-[#bfe7d6] bg-[#eefbf6] p-4 text-sm text-[#176b4c]">
         <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#1ca76f]"></span>
