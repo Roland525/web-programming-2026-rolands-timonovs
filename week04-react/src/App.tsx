@@ -4,6 +4,8 @@ import Resources from "./components/Resources";
 import Footer from "./components/Footer";
 import StatCard from "./components/StatCard";
 import SectionHeading from "./components/SectionHeading";
+import ProjectList from "./components/ProjectList";
+import DeadlineSection from "./components/DeadlineSection";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
 
 interface AppProps {
@@ -36,9 +38,11 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
             <StatCard index="04" label="Rīga now" value="…" note={weather.status} />
           </div>
         </section>
-        <section id="projects" className="mx-auto w-full max-w-[1220px] px-5 py-[34px]">
-          <p>{projects.status}</p>
-          {projects.status === "error" && <button onClick={onRetryProjects}>Try again</button>}
+        <section id="projects" className="mx-auto w-full max-w-[1220px] px-[14px] py-[34px] pb-4 sm:px-5">
+          <SectionHeading eyebrow="PROJECTS" title="Current work" />
+          <div className="projects-grid grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-3" id="projectGrid">
+            <ProjectList state={projects} filter="all" onRetry={onRetryProjects} />
+          </div>
         </section>
         <section className="mx-auto w-full max-w-[1220px] px-[14px] pt-[34px] sm:px-5" id="weeklyStatus">
           <div className="flex items-start gap-3 rounded-xl border border-[#bfe7d6] bg-[#eefbf6] p-4 text-sm text-[#176b4c]">
@@ -47,13 +51,7 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
           </div>
         </section>
         <section className="mx-auto grid w-full max-w-[1220px] grid-cols-1 gap-[18px] px-[14px] py-[34px] pb-16 sm:px-5 lg:grid-cols-[1.45fr_.75fr]">
-          <section className="rounded-[18px] border border-[#e5e9f2] border-l-4 border-l-[#6d5dfc] bg-white p-6" id="deadlines">
-            <SectionHeading eyebrow="DEADLINES" title="Coming up">
-              <a className="text-xs font-extrabold text-[#6d5dfc]" href="#">See all</a>
-            </SectionHeading>
-            <p>{deadlines.status}</p>
-            {deadlines.status === "error" && <button onClick={onRetryDeadlines}>Try again</button>}
-          </section>
+          <DeadlineSection deadlines={deadlines} onRetry={onRetryDeadlines} />
           <Resources />
         </section>
       </main>
