@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Resources from "./components/Resources";
@@ -17,11 +18,23 @@ interface AppProps {
   onRetryDeadlines: () => void;
 }
 
+function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadState<Project[]> {
+  if (state.status !== "success") return state;
+  return { status: "success", data: [...state.data, ...local] };
+}
+
 function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }: AppProps) {
+  const [localProjects, setLocalProjects] = useState<Project[]>([]);
+  const allProjects = withLocalProjects(projects, localProjects);
+
+  function handleAdd(project: Project): void {
+    setLocalProjects([...localProjects, project]);
+  }
+
   let activeCount = "…";
-  if (projects.status === "error") activeCount = "–";
-  if (projects.status === "success") {
-    activeCount = String(projects.data.filter((project) => project.status === "active").length);
+  if (allProjects.status === "error") activeCount = "–";
+  if (allProjects.status === "success") {
+    activeCount = String(allProjects.data.filter((project) => project.status === "active").length);
   }
   return (
     <>
@@ -33,13 +46,13 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
             <p className="max-w-[420px] text-sm text-[#6c7485]">A quick snapshot of what needs attention today.</p>
           </SectionHeading>
           <div className="stats-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <StatCard index="01" label="Active projects" value={activeCount} note="calculated from data" tone="positive" />
+            <StatCard index="01" label="Active projects" value={activeCount} note="API + your projects" tone="positive" />
             <StatCard index="02" label="Tasks completed" value="18" note="+6 this week" tone="positive" />
             <StatCard index="03" label="Quiz average" value="84%" note="Last 4 quizzes" />
             <WeatherCard weather={weather} />
           </div>
         </section>
-        <ProjectSection projects={projects} onRetry={onRetryProjects} />
+        <ProjectSection projects={allProjects} onRetry={onRetryProjects} onAdd={handleAdd} />
         <section className="mx-auto w-full max-w-[1220px] px-[14px] pt-[34px] sm:px-5" id="weeklyStatus">
           <div className="flex items-start gap-3 rounded-xl border border-[#bfe7d6] bg-[#eefbf6] p-4 text-sm text-[#176b4c]">
             <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#1ca76f]"></span>
