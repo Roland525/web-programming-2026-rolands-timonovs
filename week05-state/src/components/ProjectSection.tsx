@@ -3,6 +3,7 @@ import type { LoadState, Project, ProjectFilter } from "../types";
 import ProjectFilters from "./ProjectFilters";
 import ProjectList from "./ProjectList";
 import SectionHeading from "./SectionHeading";
+import AddProjectForm from "./AddProjectForm";
 
 interface ProjectSectionProps {
   projects: LoadState<Project[]>;
@@ -20,6 +21,7 @@ function ProjectSection({ projects, onRetry }: ProjectSectionProps) {
       <div className="projects-grid grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-3" id="projectGrid">
         <ProjectList state={projects} filter={filter} onRetry={onRetry} />
       </div>
+      <AddProjectForm disabled={projects.status !== "success"} onAdd={() => {}} />
     </section>
   );
 }
