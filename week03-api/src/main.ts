@@ -1,11 +1,11 @@
 import "./style.css";
 
-import { fetchDeadlines, fetchProjects } from "./api";
+import { fetchDeadlines, fetchProjects, fetchWeather } from "./api";
 import { createProject, validateProject } from "./form";
 import type { FormErrors, ProjectFormValues } from "./form";
-import { renderDeadlines, renderProjects } from "./render";
+import { renderDeadlines, renderProjects, renderWeather } from "./render";
 import { loadProjects, saveProjects } from "./storage";
-import type { Deadline, LoadState, Project, ProjectFilter } from "./types";
+import type { CurrentWeather, Deadline, LoadState, Project, ProjectFilter } from "./types";
 
 function filterProjects(projects: Project[], filter: ProjectFilter): Project[] {
   if (filter === "all") return projects;
@@ -41,6 +41,8 @@ const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
 const mainNav = document.querySelector<HTMLElement>("#mainNav");
 const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-button");
 const activeProjectCount = document.querySelector<HTMLElement>("#activeProjectCount");
+const weatherValue = document.querySelector<HTMLElement>("#weatherValue");
+const weatherDetails = document.querySelector<HTMLElement>("#weatherDetails");
 const projectForm = document.querySelector<HTMLFormElement>("#projectForm");
 const addProjectButton = projectForm?.querySelector<HTMLButtonElement>('button[type="submit"]') ?? null;
 const titleInput = document.querySelector<HTMLInputElement>("#projectTitle");
@@ -59,6 +61,7 @@ let apiProjects: Project[] = [];
 let localProjects = loadProjects(localStorage, []);
 let projectState: LoadState<Project[]> = { status: "loading" };
 let deadlineState: LoadState<Deadline[]> = { status: "loading" };
+let weatherState: LoadState<CurrentWeather> = { status: "loading" };
 
 function updateProjectSection(): void {
   if (projectGrid) {
@@ -91,6 +94,11 @@ function updateProjectSection(): void {
 function updateDeadlineSection(): void {
   if (!deadlineList) return;
   renderDeadlines(deadlineList, deadlineState, loadDeadlineData);
+}
+
+function updateWeatherCard(): void {
+  if (!weatherValue || !weatherDetails) return;
+  renderWeather(weatherValue, weatherDetails, weatherState);
 }
 
 async function loadProjectData(): Promise<void> {
@@ -130,6 +138,20 @@ async function loadDeadlineData(): Promise<void> {
   updateDeadlineSection();
 }
 
+async function loadWeatherData(): Promise<void> {
+  weatherState = { status: "loading" };
+  updateWeatherCard();
+
+  try {
+    const weather = await fetchWeather();
+    weatherState = { status: "success", data: weather };
+  } catch {
+    weatherState = { status: "error", message: "Weather unavailable" };
+  }
+
+  updateWeatherCard();
+}
+
 function updateFilterButtons(): void {
   filterButtons.forEach((button) => {
     const isActive = button.dataset.filter === selectedFilter;
@@ -150,8 +172,10 @@ function showFormErrors(errors: FormErrors): void {
 setupNavigation(menuButton, mainNav);
 updateProjectSection();
 updateDeadlineSection();
+updateWeatherCard();
 void loadProjectData();
 void loadDeadlineData();
+void loadWeatherData();
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {

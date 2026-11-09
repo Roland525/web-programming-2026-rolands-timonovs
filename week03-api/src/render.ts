@@ -1,4 +1,4 @@
-import type { Category, Deadline, LoadState, Project } from "./types";
+import type { Category, CurrentWeather, Deadline, LoadState, Project } from "./types";
 
 const categoryColors: Record<Category, string> = {
   Frontend: "bg-[#f0edff] text-[#6352ed]",
@@ -226,4 +226,25 @@ export function renderDeadlines(
     row.append(dateBox, information, badge);
     container.append(row);
   });
+}
+
+export function renderWeather(
+  value: HTMLElement,
+  details: HTMLElement,
+  state: LoadState<CurrentWeather>,
+): void {
+  if (state.status === "loading") {
+    value.textContent = "…";
+    details.textContent = "Loading weather…";
+    return;
+  }
+
+  if (state.status === "error") {
+    value.textContent = "–";
+    details.textContent = "Weather unavailable";
+    return;
+  }
+
+  value.textContent = `${Math.round(state.data.temperature)}°C`;
+  details.textContent = `${state.data.windSpeed} km/h wind`;
 }
