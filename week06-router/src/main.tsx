@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -18,6 +19,7 @@ let weather: LoadState<CurrentWeather> = { status: "loading" };
 function render(): void {
   root.render(
     <StrictMode>
+      <BrowserRouter>
       <App
         projects={projects}
         deadlines={deadlines}
@@ -25,6 +27,7 @@ function render(): void {
         onRetryProjects={() => void loadProjects()}
         onRetryDeadlines={() => void loadDeadlines()}
       />
+      </BrowserRouter>
     </StrictMode>,
   );
 }

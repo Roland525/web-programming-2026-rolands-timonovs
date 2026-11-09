@@ -1,9 +1,9 @@
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { isProjectList } from "./guards";
-import Header from "./components/Header";
+import { Route, Routes } from "react-router";
+import Layout from "./components/Layout";
 import Hero from "./components/Hero";
 import Resources from "./components/Resources";
-import Footer from "./components/Footer";
 import StatCard from "./components/StatCard";
 import SectionHeading from "./components/SectionHeading";
 import ProjectSection from "./components/ProjectSection";
@@ -40,9 +40,9 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
     activeCount = String(allProjects.data.filter((project) => project.status === "active").length);
   }
   return (
-    <>
-      <Header userName="Rolands Timonovs" userInitials="RT" course="Web Programming" />
-      <main>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<div>
         <Hero />
         <section className="mx-auto w-full max-w-[1220px] px-[14px] py-[34px] pb-4 sm:px-5">
           <SectionHeading eyebrow="OVERVIEW" title="Your workspace">
@@ -66,9 +66,13 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
           <DeadlineSection deadlines={deadlines} onRetry={onRetryDeadlines} />
           <Resources />
         </section>
-      </main>
-      <Footer note="React components with TypeScript" />
-    </>
+        </div>} />
+        <Route path="projects" element={<h1>Projects</h1>} />
+        <Route path="projects/:projectId" element={<h1>Project details</h1>} />
+        <Route path="deadlines" element={<h1>Deadlines</h1>} />
+        <Route path="*" element={<h1>Page not found</h1>} />
+      </Route>
+    </Routes>
   );
 }
 
