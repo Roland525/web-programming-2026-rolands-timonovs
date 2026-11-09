@@ -3,8 +3,8 @@ import type { CurrentWeather, Deadline, Project } from "./types";
 
 const weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&current=temperature_2m,wind_speed_10m,weather_code&timezone=Europe%2FRiga";
 
-async function getJson(url: string): Promise<unknown> {
-  const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
+async function getJson(url: string, signal: AbortSignal): Promise<unknown> {
+  const response = await fetch(url, { signal: AbortSignal.any([signal, AbortSignal.timeout(8000)]) });
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}.`);
@@ -14,8 +14,8 @@ async function getJson(url: string): Promise<unknown> {
   return data;
 }
 
-export async function fetchProjects(): Promise<Project[]> {
-  const data = await getJson("/api/projects.json");
+export async function fetchProjects(signal: AbortSignal): Promise<Project[]> {
+  const data = await getJson("/api/projects.json", signal);
 
   if (!Array.isArray(data) || !data.every(isProject)) {
     throw new Error("Projects came back in an unexpected format.");
@@ -24,8 +24,8 @@ export async function fetchProjects(): Promise<Project[]> {
   return data;
 }
 
-export async function fetchDeadlines(): Promise<Deadline[]> {
-  const data = await getJson("/api/deadlines.json");
+export async function fetchDeadlines(signal: AbortSignal): Promise<Deadline[]> {
+  const data = await getJson("/api/deadlines.json", signal);
 
   if (!Array.isArray(data) || !data.every(isDeadline)) {
     throw new Error("Deadlines came back in an unexpected format.");
@@ -34,8 +34,8 @@ export async function fetchDeadlines(): Promise<Deadline[]> {
   return data;
 }
 
-export async function fetchWeather(): Promise<CurrentWeather> {
-  const data = await getJson(weatherUrl);
+export async function fetchWeather(signal: AbortSignal): Promise<CurrentWeather> {
+  const data = await getJson(weatherUrl, signal);
 
   if (!isRecord(data) || !isRecord(data.current)) {
     throw new Error("Weather came back in an unexpected format.");

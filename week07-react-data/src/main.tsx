@@ -36,7 +36,7 @@ async function loadProjects(): Promise<void> {
   projects = { status: "loading" };
   render();
   try {
-    projects = { status: "success", data: await fetchProjects() };
+    projects = { status: "success", data: await fetchProjects(new AbortController().signal) };
   } catch (error: unknown) {
     projects = {
       status: "error",
@@ -49,7 +49,7 @@ async function loadDeadlines(): Promise<void> {
   deadlines = { status: "loading" };
   render();
   try {
-    deadlines = { status: "success", data: await fetchDeadlines() };
+    deadlines = { status: "success", data: await fetchDeadlines(new AbortController().signal) };
   } catch (error: unknown) {
     deadlines = {
       status: "error",
@@ -62,7 +62,7 @@ async function loadWeather(): Promise<void> {
   weather = { status: "loading" };
   render();
   try {
-    weather = { status: "success", data: await fetchWeather() };
+    weather = { status: "success", data: await fetchWeather(new AbortController().signal) };
   } catch {
     weather = { status: "error", message: "Weather unavailable" };
   }
