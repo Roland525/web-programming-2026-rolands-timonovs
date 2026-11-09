@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 interface HeaderProps {
   userName: string;
@@ -16,6 +16,18 @@ function navClass({ isActive }: { isActive: boolean }): string {
 }
 function Header({ userName, userInitials, course }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    function handleKey(event: KeyboardEvent): void {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    }
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isMenuOpen]);
+
   function closeMenu(): void {
     setIsMenuOpen(false);
   }
