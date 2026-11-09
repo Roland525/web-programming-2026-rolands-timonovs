@@ -1,0 +1,32 @@
+[
+  {
+    "title": "TypeScript checkpoint",
+    "course": "Web Programming",
+    "date": "2026-11-16",
+    "time": "23:59"
+  },
+  {
+    "title": "API practice",
+    "course": "Web Programming",
+    "date": "2026-11-19",
+    "time": "18:00"
+  },
+  {
+    "title": "Weather Dashboard",
+    "course": "Web Programming",
+    "date": "2026-11-22",
+    "time": "23:59"
+  },
+  {
+    "title": "Router practice",
+    "course": "Web Programming",
+    "date": "2026-11-25",
+    "time": "12:00"
+  },
+  {
+    "title": "React data exercise",
+    "course": "Web Programming",
+    "date": "2026-11-28",
+    "time": "15:00"
+  }
+]
