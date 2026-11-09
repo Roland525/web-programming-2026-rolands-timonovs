@@ -4,8 +4,9 @@ import Resources from "./components/Resources";
 import Footer from "./components/Footer";
 import StatCard from "./components/StatCard";
 import SectionHeading from "./components/SectionHeading";
-import ProjectList from "./components/ProjectList";
+import ProjectSection from "./components/ProjectSection";
 import DeadlineSection from "./components/DeadlineSection";
+import WeatherCard from "./components/WeatherCard";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
 
 interface AppProps {
@@ -35,15 +36,10 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
             <StatCard index="01" label="Active projects" value={activeCount} note="calculated from data" tone="positive" />
             <StatCard index="02" label="Tasks completed" value="18" note="+6 this week" tone="positive" />
             <StatCard index="03" label="Quiz average" value="84%" note="Last 4 quizzes" />
-            <StatCard index="04" label="Rīga now" value="…" note={weather.status} />
+            <WeatherCard weather={weather} />
           </div>
         </section>
-        <section id="projects" className="mx-auto w-full max-w-[1220px] px-[14px] py-[34px] pb-4 sm:px-5">
-          <SectionHeading eyebrow="PROJECTS" title="Current work" />
-          <div className="projects-grid grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-3" id="projectGrid">
-            <ProjectList state={projects} filter="all" onRetry={onRetryProjects} />
-          </div>
-        </section>
+        <ProjectSection projects={projects} onRetry={onRetryProjects} />
         <section className="mx-auto w-full max-w-[1220px] px-[14px] pt-[34px] sm:px-5" id="weeklyStatus">
           <div className="flex items-start gap-3 rounded-xl border border-[#bfe7d6] bg-[#eefbf6] p-4 text-sm text-[#176b4c]">
             <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#1ca76f]"></span>

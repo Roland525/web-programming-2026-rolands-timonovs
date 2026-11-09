@@ -5,7 +5,7 @@
     "description": "Create a polished portfolio with reusable components and responsive layouts.",
     "category": "Frontend",
     "status": "active",
-    "dueDate": "2026-10-15",
+    "dueDate": "2026-10-25",
     "progress": 72
   },
   {
@@ -14,7 +14,7 @@
     "description": "Fetch remote data, handle loading states, and present forecast information clearly.",
     "category": "API",
     "status": "active",
-    "dueDate": "2026-10-22",
+    "dueDate": "2026-11-03",
     "progress": 45
   },
   {
