@@ -4,14 +4,13 @@ import StatCard from "../components/StatCard";
 import SectionHeading from "../components/SectionHeading";
 import DeadlineSection from "../components/DeadlineSection";
 import WeatherCard from "../components/WeatherCard";
-import type { CurrentWeather, Deadline, LoadState, Project } from "../types";
+import type { Deadline, LoadState, Project } from "../types";
 interface DashboardPageProps {
   projects: LoadState<Project[]>;
   deadlines: LoadState<Deadline[]>;
-  weather: LoadState<CurrentWeather>;
   onRetryDeadlines: () => void;
 }
-function DashboardPage({ projects, deadlines, weather, onRetryDeadlines }: DashboardPageProps) {
+function DashboardPage({ projects, deadlines, onRetryDeadlines }: DashboardPageProps) {
   let activeCount = "…";
   if (projects.status === "error") activeCount = "–";
   if (projects.status === "success") {
@@ -29,7 +28,7 @@ function DashboardPage({ projects, deadlines, weather, onRetryDeadlines }: Dashb
           <StatCard index="01" label="Active projects" value={activeCount} note="API + your projects" tone="positive" />
           <StatCard index="02" label="Tasks completed" value="18" note="+6 this week" tone="positive" />
           <StatCard index="03" label="Quiz average" value="84%" note="Last 4 quizzes" />
-          <WeatherCard weather={weather} />
+          <WeatherCard />
         </div>
       </section>
       <section className="mx-auto grid w-full max-w-[1220px] grid-cols-1 gap-[18px] px-[14px] py-[34px] pb-16 sm:px-5 lg:grid-cols-[1.45fr_.75fr]">

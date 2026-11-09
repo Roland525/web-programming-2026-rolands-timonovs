@@ -1,11 +1,10 @@
-import type { CurrentWeather, LoadState } from "../types";
+import { fetchWeather } from "../api";
+import { useFetch } from "../hooks/useFetch";
 import StatCard from "./StatCard";
 
-interface WeatherCardProps {
-  weather: LoadState<CurrentWeather>;
-}
+function WeatherCard() {
+  const { state: weather } = useFetch(fetchWeather);
 
-function WeatherCard({ weather }: WeatherCardProps) {
   if (weather.status === "loading") {
     return <StatCard index="04" label="Rīga now" value="…" note="Loading weather…" />;
   }

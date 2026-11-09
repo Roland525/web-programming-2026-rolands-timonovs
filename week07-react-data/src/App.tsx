@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router";
+import { fetchProjects, fetchDeadlines } from "./api";
+import { useFetch } from "./hooks/useFetch";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { isProjectList } from "./guards";
 import Layout from "./components/Layout";
@@ -7,15 +9,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import DeadlinesPage from "./pages/DeadlinesPage";
-import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
-
-interface AppProps {
-  projects: LoadState<Project[]>;
-  deadlines: LoadState<Deadline[]>;
-  weather: LoadState<CurrentWeather>;
-  onRetryProjects: () => void;
-  onRetryDeadlines: () => void;
-}
+import type { LoadState, Project } from "./types";
 
 const STORAGE_KEY = "campusflow.week07.localProjects";
 
@@ -24,7 +18,9 @@ function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadS
   return { status: "success", data: [...state.data, ...local] };
 }
 
-function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }: AppProps) {
+function App() {
+  const { state: projects, retry: onRetryProjects } = useFetch(fetchProjects);
+  const { state: deadlines, retry: onRetryDeadlines } = useFetch(fetchDeadlines);
   const [localProjects, setLocalProjects] = useLocalStorage<Project[]>(STORAGE_KEY, [], isProjectList);
   const allProjects = withLocalProjects(projects, localProjects);
 
@@ -35,7 +31,7 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<DashboardPage projects={allProjects} deadlines={deadlines} weather={weather} onRetryDeadlines={onRetryDeadlines} />} />
+        <Route index element={<DashboardPage projects={allProjects} deadlines={deadlines} onRetryDeadlines={onRetryDeadlines} />} />
         <Route path="projects" element={<ProjectsPage projects={allProjects} onRetry={onRetryProjects} onAdd={handleAdd} />} />
         <Route path="projects/:projectId" element={<ProjectDetailsPage projects={allProjects} onRetry={onRetryProjects} />} />
         <Route path="deadlines" element={<DeadlinesPage deadlines={deadlines} onRetry={onRetryDeadlines} />} />
