@@ -1,26 +1,24 @@
 # Mākslīgā intelekta izmantošana
 
-**Vārds, uzvārds:** Rolands Timonovs  
-**Izmantotais MI rīks:** Codex
+**Vārds, uzvārds:** Rolands Timonovs
+**Izmantotais(-ie) MI rīks(-i):** ChatGPT
 
 ## Kam es izmantoju mākslīgo intelektu?
 
-- lai saprastu uzdevuma prasības;
-- lai uzrakstītu vienkāršu TypeScript kodu;
-- lai atrastu un pārbaudītu kļūdas.
+Kad nesapratu kādu TypeScript funkciju, lūdzu ChatGPT paskaidrot, ko tā dara un kā darbojas.
 
 ## Kuru kodu vai konfigurāciju būtiskā apjomā ģenerēja mākslīgais intelekts?
 
-- TypeScript failus, Vite konfigurāciju un pārbaudes testus, kuri vēlāk tika izņemti.
+ChatGPT palīdzēja saprast funkciju darbību.
 
-## Kuru kodu vai konfigurāciju es uzrakstīju pats vai būtiski pārveidoju?
+## Kuru kodu vai konfigurāciju es uzrakstīju pats/pati vai būtiski pārveidoju?
 
-- 1. nedēļas lapas dizainu un projekta saturu.
+Darba izmaiņas ir datos, filtros un projektu pievienošanas formā.
 
 ## Viens MI ieteikums, kuru es noraidīju vai izmainīju
 
-Es izvēlējos vienkāršāku failu un funkciju struktūru, lai kodu būtu vieglāk saprast.
+Konkrētu piemēru neatceros.
 
-## Viena lieta, kuru es pārbaudīju pats, nevis vienkārši uzticējos MI atbildei
+## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Es pārbaudīju formu, filtrus un `localStorage` pārlūkā, kā arī palaidu `npm run build`.
+Lapas darbību vēl nepārbaudīju.

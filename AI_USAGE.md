@@ -1,26 +1,11 @@
 # Mākslīgā intelekta izmantošana
 
-**Vārds, uzvārds:**  
-**Izmantotais(-ie) MI rīks(-i):**  
+Katras nedēļas AI_USAGE.md ir aizpildīts pēc uzdevuma jautājumiem.
 
-## Kam es izmantoju mākslīgo intelektu?
-
-- 
-- 
-- 
-
-## Kuru kodu vai konfigurāciju būtiskā apjomā ģenerēja mākslīgais intelekts?
-
-- 
-
-## Kuru kodu vai konfigurāciju es uzrakstīju pats/pati vai būtiski pārveidoju?
-
-- 
-
-## Viens MI ieteikums, kuru es noraidīju vai izmainīju
-
-Īsi paskaidrojiet savu izvēli:
-
-## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
-
-Īsi paskaidrojiet, ko un kā jūs pārbaudījāt:
+- [1. nedēļa](week01-tailwind/AI_USAGE.md)
+- [2. nedēļa](week02-typescript/AI_USAGE.md)
+- [3. nedēļa](week03-api/AI_USAGE.md)
+- [4. nedēļa](week04-react/AI_USAGE.md)
+- [5. nedēļa](week05-state/AI_USAGE.md)
+- [6. nedēļa](week06-router/AI_USAGE.md)
+- [7. nedēļa](week07-react-data/AI_USAGE.md)
