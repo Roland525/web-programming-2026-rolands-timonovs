@@ -91,4 +91,3 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
 
 
 export default App;
-
