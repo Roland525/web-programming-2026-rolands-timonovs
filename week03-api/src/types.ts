@@ -4,6 +4,8 @@ export type ProjectFilter = ProjectStatus | "all";
 
 export type Category = "Frontend" | "API" | "JavaScript" | "Design";
 
+export const CATEGORIES: Category[] = ["Frontend", "API", "JavaScript", "Design"];
+
 export interface Project {
   id: string;
   title: string;

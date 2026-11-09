@@ -1,4 +1,4 @@
-import type { Category, Project } from "./types";
+import { CATEGORIES, type Category, type Project } from "./types";
 
 export interface FormValues {
   title: string;
@@ -10,8 +10,6 @@ export interface FormValues {
 
 export type FieldName = keyof FormValues;
 export type FormErrors = Partial<Record<FieldName, string>>;
-
-export const CATEGORIES: Category[] = ["Frontend", "API", "JavaScript", "Design"];
 
 export const EMPTY_FORM: FormValues = {
   title: "",

@@ -5,7 +5,7 @@
     "description": "Create a polished portfolio with reusable components and responsive layouts.",
     "category": "Frontend",
     "status": "active",
-    "dueDate": "2026-10-15",
+    "dueDate": "2026-11-16",
     "progress": 72
   },
   {
@@ -14,7 +14,7 @@
     "description": "Fetch remote data, handle loading states, and present forecast information clearly.",
     "category": "API",
     "status": "active",
-    "dueDate": "2026-10-22",
+    "dueDate": "2026-11-19",
     "progress": 45
   },
   {
@@ -23,7 +23,7 @@
     "description": "Build a small CRUD interface with filtering, local storage, and form validation.",
     "category": "JavaScript",
     "status": "done",
-    "dueDate": "2026-10-10",
+    "dueDate": "2026-11-22",
     "progress": 100
   },
   {
@@ -32,7 +32,7 @@
     "description": "Design a simple weekly planner for lessons, homework, and study time.",
     "category": "Design",
     "status": "active",
-    "dueDate": "2026-11-15",
+    "dueDate": "2026-11-25",
     "progress": 25
   }
 ]

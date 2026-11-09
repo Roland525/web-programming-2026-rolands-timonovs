@@ -1,6 +1,6 @@
 import { useState, type SubmitEvent } from "react";
-import type { Project } from "../types";
-import { CATEGORIES, EMPTY_FORM, validate } from "../validation";
+import { CATEGORIES, type Project } from "../types";
+import { EMPTY_FORM, validate } from "../validation";
 import type { FieldName, FormErrors, FormValues } from "../validation";
 import Field from "./Field";
 
