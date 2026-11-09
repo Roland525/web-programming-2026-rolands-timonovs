@@ -4,8 +4,22 @@ import Resources from "./components/Resources";
 import Footer from "./components/Footer";
 import StatCard from "./components/StatCard";
 import SectionHeading from "./components/SectionHeading";
+import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
 
-function App() {
+interface AppProps {
+  projects: LoadState<Project[]>;
+  deadlines: LoadState<Deadline[]>;
+  weather: LoadState<CurrentWeather>;
+  onRetryProjects: () => void;
+  onRetryDeadlines: () => void;
+}
+
+function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }: AppProps) {
+  let activeCount = "…";
+  if (projects.status === "error") activeCount = "–";
+  if (projects.status === "success") {
+    activeCount = String(projects.data.filter((project) => project.status === "active").length);
+  }
   return (
     <>
       <Header userName="Rolands Timonovs" userInitials="RT" course="Web Programming" />
@@ -16,11 +30,15 @@ function App() {
             <p className="max-w-[420px] text-sm text-[#6c7485]">A quick snapshot of what needs attention today.</p>
           </SectionHeading>
           <div className="stats-grid grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <StatCard index="01" label="Active projects" value="3" note="calculated from data" tone="positive" />
+            <StatCard index="01" label="Active projects" value={activeCount} note="calculated from data" tone="positive" />
             <StatCard index="02" label="Tasks completed" value="18" note="+6 this week" tone="positive" />
             <StatCard index="03" label="Quiz average" value="84%" note="Last 4 quizzes" />
-            <StatCard index="04" label="Rīga now" value="…" note="Loading weather…" />
+            <StatCard index="04" label="Rīga now" value="…" note={weather.status} />
           </div>
+        </section>
+        <section id="projects" className="mx-auto w-full max-w-[1220px] px-5 py-[34px]">
+          <p>{projects.status}</p>
+          {projects.status === "error" && <button onClick={onRetryProjects}>Try again</button>}
         </section>
         <section className="mx-auto w-full max-w-[1220px] px-[14px] pt-[34px] sm:px-5" id="weeklyStatus">
           <div className="flex items-start gap-3 rounded-xl border border-[#bfe7d6] bg-[#eefbf6] p-4 text-sm text-[#176b4c]">
@@ -33,6 +51,8 @@ function App() {
             <SectionHeading eyebrow="DEADLINES" title="Coming up">
               <a className="text-xs font-extrabold text-[#6d5dfc]" href="#">See all</a>
             </SectionHeading>
+            <p>{deadlines.status}</p>
+            {deadlines.status === "error" && <button onClick={onRetryDeadlines}>Try again</button>}
           </section>
           <Resources />
         </section>
