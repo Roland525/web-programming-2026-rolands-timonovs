@@ -20,3 +20,15 @@ export interface Deadline {
   date: string;
   time: string;
 }
+
+export interface CurrentWeather {
+  time: string;
+  temperature: number;
+  windSpeed: number;
+  weatherCode: number;
+}
+
+export type LoadState<T> =
+  | { status: "loading" }
+  | { status: "error"; message: string }
+  | { status: "success"; data: T };
