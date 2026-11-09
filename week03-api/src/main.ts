@@ -58,7 +58,7 @@ const progressError = document.querySelector<HTMLElement>('[data-error="progress
 
 let selectedFilter: ProjectFilter = "all";
 let apiProjects: Project[] = [];
-let localProjects = loadProjects(localStorage, []);
+let localProjects = loadProjects([]);
 let projectState: LoadState<Project[]> = { status: "loading" };
 let deadlineState: LoadState<Deadline[]> = { status: "loading" };
 let weatherState: LoadState<CurrentWeather> = { status: "loading" };
@@ -78,8 +78,8 @@ function updateProjectSection(): void {
   }
 
   if (activeProjectCount) {
-    if (projectState.status === "loading") activeProjectCount.textContent = "…";
-    if (projectState.status === "error") activeProjectCount.textContent = "–";
+    if (projectState.status === "loading") activeProjectCount.textContent = "â€¦";
+    if (projectState.status === "error") activeProjectCount.textContent = "â€“";
     if (projectState.status === "success") {
       const activeProjects = projectState.data.filter((project) => project.status === "active");
       activeProjectCount.textContent = String(activeProjects.length);
@@ -213,7 +213,7 @@ if (
     if (Object.keys(errors).length > 0) return;
 
     localProjects.push(createProject(values));
-    saveProjects(localStorage, localProjects);
+    saveProjects(localProjects);
     projectState = {
       status: "success",
       data: [...apiProjects, ...localProjects],

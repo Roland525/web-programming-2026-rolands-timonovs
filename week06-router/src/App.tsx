@@ -8,7 +8,6 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import DeadlinesPage from "./pages/DeadlinesPage";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
-
 interface AppProps {
   projects: LoadState<Project[]>;
   deadlines: LoadState<Deadline[]>;
@@ -16,22 +15,17 @@ interface AppProps {
   onRetryProjects: () => void;
   onRetryDeadlines: () => void;
 }
-
 const STORAGE_KEY = "campusflow.week06.localProjects";
-
 function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadState<Project[]> {
   if (state.status !== "success") return state;
   return { status: "success", data: [...state.data, ...local] };
 }
-
 function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }: AppProps) {
   const [localProjects, setLocalProjects] = useLocalStorage<Project[]>(STORAGE_KEY, [], isProjectList);
   const allProjects = withLocalProjects(projects, localProjects);
-
   function handleAdd(project: Project): void {
     setLocalProjects([...localProjects, project]);
   }
-
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -44,5 +38,4 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
     </Routes>
   );
 }
-
 export default App;

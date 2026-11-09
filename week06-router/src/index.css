@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+/* Garš projekta teksts drīkst pāriet nākamajā rindā. */
+.project-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

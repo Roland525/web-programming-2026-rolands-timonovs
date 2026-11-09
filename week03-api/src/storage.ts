@@ -3,11 +3,11 @@ import { isProject } from "./guards";
 
 const storageKey = "campusflow.week03.localProjects";
 
-export function loadProjects(storage: Storage, fallback: Project[]): Project[] {
-  const savedText = storage.getItem(storageKey);
-  if (!savedText) return [...fallback];
-
+export function loadProjects(fallback: Project[]): Project[] {
   try {
+    const savedText = localStorage.getItem(storageKey);
+    if (!savedText) return [...fallback];
+
     const savedData: unknown = JSON.parse(savedText);
     if (!Array.isArray(savedData) || !savedData.every(isProject)) {
       return [...fallback];
@@ -18,6 +18,10 @@ export function loadProjects(storage: Storage, fallback: Project[]): Project[] {
   }
 }
 
-export function saveProjects(storage: Storage, projects: Project[]): void {
-  storage.setItem(storageKey, JSON.stringify(projects));
+export function saveProjects(projects: Project[]): void {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(projects));
+  } catch {
+    // Ja saglabāt nevar, projekts paliek pašreizējā sarakstā.
+  }
 }
