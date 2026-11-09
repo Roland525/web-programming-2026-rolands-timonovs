@@ -33,3 +33,7 @@ export function isDeadline(value: unknown): value is Deadline {
     && typeof value.date === "string"
     && typeof value.time === "string";
 }
+
+export function isProjectList(value: unknown): value is Project[] {
+  return Array.isArray(value) && value.every(isProject);
+}

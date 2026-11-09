@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import { isProjectList } from "./guards";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Resources from "./components/Resources";
@@ -18,13 +19,15 @@ interface AppProps {
   onRetryDeadlines: () => void;
 }
 
+const STORAGE_KEY = "campusflow.week05.localProjects";
+
 function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadState<Project[]> {
   if (state.status !== "success") return state;
   return { status: "success", data: [...state.data, ...local] };
 }
 
 function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }: AppProps) {
-  const [localProjects, setLocalProjects] = useState<Project[]>([]);
+  const [localProjects, setLocalProjects] = useLocalStorage<Project[]>(STORAGE_KEY, [], isProjectList);
   const allProjects = withLocalProjects(projects, localProjects);
 
   function handleAdd(project: Project): void {
