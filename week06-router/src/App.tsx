@@ -11,6 +11,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ProjectsPage from "./pages/ProjectsPage";
 
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import DeadlinesPage from "./pages/DeadlinesPage";
 
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
@@ -77,7 +78,7 @@ function App({ projects, deadlines, weather, onRetryProjects, onRetryDeadlines }
 
         <Route path="deadlines" element={<DeadlinesPage deadlines={deadlines} onRetry={onRetryDeadlines} />} />
 
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
 
       </Route>
 

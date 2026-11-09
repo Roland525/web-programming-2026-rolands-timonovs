@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function Hero() {
   return (
     <section className="bg-[radial-gradient(circle_at_15%_10%,rgba(109,93,252,0.14),transparent_34%),radial-gradient(circle_at_85%_0%,rgba(55,136,255,0.10),transparent_28%)] py-12 md:py-16">
@@ -17,12 +19,12 @@ function Hero() {
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#projects"
+            <Link
+              to="/projects"
               className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#6d5dfc] px-[18px] text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#5547df] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d5dfc]"
             >
               View projects
-            </a>
+            </Link>
 
             <a
               href="#resources"
