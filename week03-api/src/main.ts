@@ -1,11 +1,11 @@
 import "./style.css";
 
-import { deadlines, startingProjects } from "./data";
+import { fetchDeadlines, fetchProjects } from "./api";
 import { createProject, validateProject } from "./form";
 import type { FormErrors, ProjectFormValues } from "./form";
 import { renderDeadlines, renderProjects } from "./render";
 import { loadProjects, saveProjects } from "./storage";
-import type { Project, ProjectFilter } from "./types";
+import type { Deadline, LoadState, Project, ProjectFilter } from "./types";
 
 function filterProjects(projects: Project[], filter: ProjectFilter): Project[] {
   if (filter === "all") return projects;
@@ -30,6 +30,11 @@ function setupNavigation(
   });
 }
 
+function getErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof Error) return `${fallback} ${error.message}`;
+  return fallback;
+}
+
 const projectGrid = document.querySelector<HTMLElement>("#projectGrid");
 const deadlineList = document.querySelector<HTMLElement>("#deadlineList");
 const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
@@ -37,6 +42,7 @@ const mainNav = document.querySelector<HTMLElement>("#mainNav");
 const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-button");
 const activeProjectCount = document.querySelector<HTMLElement>("#activeProjectCount");
 const projectForm = document.querySelector<HTMLFormElement>("#projectForm");
+const addProjectButton = projectForm?.querySelector<HTMLButtonElement>('button[type="submit"]') ?? null;
 const titleInput = document.querySelector<HTMLInputElement>("#projectTitle");
 const descriptionInput = document.querySelector<HTMLTextAreaElement>("#projectDescription");
 const categoryInput = document.querySelector<HTMLSelectElement>("#projectCategory");
@@ -49,18 +55,79 @@ const dueDateError = document.querySelector<HTMLElement>('[data-error="dueDate"]
 const progressError = document.querySelector<HTMLElement>('[data-error="progress"]');
 
 let selectedFilter: ProjectFilter = "all";
-let projects = loadProjects(localStorage, startingProjects);
+let apiProjects: Project[] = [];
+let localProjects = loadProjects(localStorage, []);
+let projectState: LoadState<Project[]> = { status: "loading" };
+let deadlineState: LoadState<Deadline[]> = { status: "loading" };
 
-function updateProjects(): void {
-  if (!projectGrid) return;
-  const visibleProjects = filterProjects(projects, selectedFilter);
-  renderProjects(projectGrid, visibleProjects);
+function updateProjectSection(): void {
+  if (projectGrid) {
+    if (projectState.status === "success") {
+      const visibleProjects = filterProjects(projectState.data, selectedFilter);
+      renderProjects(
+        projectGrid,
+        { status: "success", data: visibleProjects },
+        loadProjectData,
+      );
+    } else {
+      renderProjects(projectGrid, projectState, loadProjectData);
+    }
+  }
+
+  if (activeProjectCount) {
+    if (projectState.status === "loading") activeProjectCount.textContent = "…";
+    if (projectState.status === "error") activeProjectCount.textContent = "–";
+    if (projectState.status === "success") {
+      const activeProjects = projectState.data.filter((project) => project.status === "active");
+      activeProjectCount.textContent = String(activeProjects.length);
+    }
+  }
+
+  if (addProjectButton) {
+    addProjectButton.disabled = projectState.status !== "success";
+  }
 }
 
-function updateActiveProjectCount(): void {
-  if (!activeProjectCount) return;
-  const activeProjects = projects.filter((project) => project.status === "active");
-  activeProjectCount.textContent = String(activeProjects.length);
+function updateDeadlineSection(): void {
+  if (!deadlineList) return;
+  renderDeadlines(deadlineList, deadlineState, loadDeadlineData);
+}
+
+async function loadProjectData(): Promise<void> {
+  projectState = { status: "loading" };
+  updateProjectSection();
+
+  try {
+    apiProjects = await fetchProjects();
+    projectState = {
+      status: "success",
+      data: [...apiProjects, ...localProjects],
+    };
+  } catch (error: unknown) {
+    projectState = {
+      status: "error",
+      message: getErrorMessage(error, "Could not load projects."),
+    };
+  }
+
+  updateProjectSection();
+}
+
+async function loadDeadlineData(): Promise<void> {
+  deadlineState = { status: "loading" };
+  updateDeadlineSection();
+
+  try {
+    const deadlines = await fetchDeadlines();
+    deadlineState = { status: "success", data: deadlines };
+  } catch (error: unknown) {
+    deadlineState = {
+      status: "error",
+      message: getErrorMessage(error, "Could not load deadlines."),
+    };
+  }
+
+  updateDeadlineSection();
 }
 
 function updateFilterButtons(): void {
@@ -80,14 +147,11 @@ function showFormErrors(errors: FormErrors): void {
   if (progressError) progressError.textContent = errors.progress ?? "";
 }
 
-updateProjects();
-updateActiveProjectCount();
-
-if (deadlineList) {
-  renderDeadlines(deadlineList, deadlines);
-}
-
 setupNavigation(menuButton, mainNav);
+updateProjectSection();
+updateDeadlineSection();
+void loadProjectData();
+void loadDeadlineData();
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -96,7 +160,7 @@ filterButtons.forEach((button) => {
 
     selectedFilter = filter;
     updateFilterButtons();
-    updateProjects();
+    updateProjectSection();
   });
 });
 
@@ -110,6 +174,7 @@ if (
 ) {
   projectForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (projectState.status !== "success") return;
 
     const values: ProjectFormValues = {
       title: titleInput.value,
@@ -123,12 +188,15 @@ if (
 
     if (Object.keys(errors).length > 0) return;
 
-    projects.push(createProject(values));
-    saveProjects(localStorage, projects);
+    localProjects.push(createProject(values));
+    saveProjects(localStorage, localProjects);
+    projectState = {
+      status: "success",
+      data: [...apiProjects, ...localProjects],
+    };
     selectedFilter = "all";
     updateFilterButtons();
-    updateProjects();
-    updateActiveProjectCount();
+    updateProjectSection();
     projectForm.reset();
     showFormErrors({});
   });

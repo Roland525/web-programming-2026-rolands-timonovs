@@ -1,4 +1,4 @@
-import type { Category, Deadline, Project } from "./types";
+import type { Category, Deadline, LoadState, Project } from "./types";
 
 const categoryColors: Record<Category, string> = {
   Frontend: "bg-[#f0edff] text-[#6352ed]",
@@ -37,8 +37,54 @@ function deadlineText(date: string, today: Date): string {
   return `${days} days`;
 }
 
-export function renderProjects(container: HTMLElement, projects: Project[]): void {
+function renderLoading(container: HTMLElement, text: string): void {
+  const message = makeElement(
+    "p",
+    "col-span-full rounded-[18px] border border-[#e5e9f2] bg-white p-8 text-center text-sm text-[#6c7485]",
+    text,
+  );
+  message.setAttribute("role", "status");
+  container.append(message);
+}
+
+function renderError(container: HTMLElement, message: string, onRetry: () => void): void {
+  const box = makeElement(
+    "div",
+    "col-span-full rounded-[18px] border border-[#f0caca] bg-[#fff5f5] p-6 text-center text-sm text-[#9c3434]",
+  );
+  box.setAttribute("role", "alert");
+
+  const text = makeElement("p", "", message);
+  const button = makeElement(
+    "button",
+    "mt-3 cursor-pointer rounded-lg bg-[#6d5dfc] px-4 py-2 text-xs font-bold text-white",
+    "Try again",
+  ) as HTMLButtonElement;
+  button.type = "button";
+  button.addEventListener("click", onRetry);
+
+  box.append(text, button);
+  container.append(box);
+}
+
+export function renderProjects(
+  container: HTMLElement,
+  state: LoadState<Project[]>,
+  onRetry: () => void,
+): void {
   container.textContent = "";
+
+  if (state.status === "loading") {
+    renderLoading(container, "Loading projects…");
+    return;
+  }
+
+  if (state.status === "error") {
+    renderError(container, state.message, onRetry);
+    return;
+  }
+
+  const projects = state.data;
 
   if (projects.length === 0) {
     const message = makeElement(
@@ -116,10 +162,28 @@ export function renderProjects(container: HTMLElement, projects: Project[]): voi
 
 export function renderDeadlines(
   container: HTMLElement,
-  items: Deadline[],
+  state: LoadState<Deadline[]>,
+  onRetry: () => void,
   today = new Date(),
 ): void {
   container.textContent = "";
+
+  if (state.status === "loading") {
+    renderLoading(container, "Loading deadlines…");
+    return;
+  }
+
+  if (state.status === "error") {
+    renderError(container, state.message, onRetry);
+    return;
+  }
+
+  const items = state.data;
+
+  if (items.length === 0) {
+    renderLoading(container, "No upcoming deadlines.");
+    return;
+  }
 
   items.forEach((deadline, index) => {
     const rowBorder = index < items.length - 1 ? "border-b border-[#e5e9f2]" : "";
