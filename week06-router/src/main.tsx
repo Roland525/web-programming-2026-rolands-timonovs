@@ -5,17 +5,14 @@ import "./index.css";
 import App from "./App";
 import { fetchDeadlines, fetchProjects, fetchWeather } from "./api";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
-
 const container = document.getElementById("root");
 if (container === null) {
   throw new Error("Element #root not found.");
 }
 const root = createRoot(container);
-
 let projects: LoadState<Project[]> = { status: "loading" };
 let deadlines: LoadState<Deadline[]> = { status: "loading" };
 let weather: LoadState<CurrentWeather> = { status: "loading" };
-
 function render(): void {
   root.render(
     <StrictMode>
@@ -31,16 +28,13 @@ function render(): void {
     </StrictMode>,
   );
 }
-
 function getErrorMessage(error: unknown, fallback: string): string {
   if (error instanceof Error) return `${fallback} ${error.message}`;
   return fallback;
 }
-
 async function loadProjects(): Promise<void> {
   projects = { status: "loading" };
   render();
-
   try {
     projects = { status: "success", data: await fetchProjects() };
   } catch (error: unknown) {
@@ -49,14 +43,11 @@ async function loadProjects(): Promise<void> {
       message: getErrorMessage(error, "Could not load projects."),
     };
   }
-
   render();
 }
-
 async function loadDeadlines(): Promise<void> {
   deadlines = { status: "loading" };
   render();
-
   try {
     deadlines = { status: "success", data: await fetchDeadlines() };
   } catch (error: unknown) {
@@ -65,23 +56,18 @@ async function loadDeadlines(): Promise<void> {
       message: getErrorMessage(error, "Could not load deadlines."),
     };
   }
-
   render();
 }
-
 async function loadWeather(): Promise<void> {
   weather = { status: "loading" };
   render();
-
   try {
     weather = { status: "success", data: await fetchWeather() };
   } catch {
     weather = { status: "error", message: "Weather unavailable" };
   }
-
   render();
 }
-
 render();
 void loadProjects();
 void loadDeadlines();

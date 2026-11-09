@@ -3,13 +3,11 @@ import type { Deadline, LoadState } from "../types";
 import DeadlineItem from "./DeadlineItem";
 import SectionHeading from "./SectionHeading";
 import { EmptyBox, ErrorBox, LoadingBox } from "./StateBox";
-
 interface DeadlineSectionProps {
   deadlines: LoadState<Deadline[]>;
   onRetry: () => void;
   limit?: number;
 }
-
 function DeadlineSection({ deadlines, onRetry, limit }: DeadlineSectionProps) {
   let content;
   if (deadlines.status === "loading") {
@@ -30,7 +28,6 @@ function DeadlineSection({ deadlines, onRetry, limit }: DeadlineSectionProps) {
       />
     ));
   }
-
   return (
     <section className="rounded-[18px] border border-[#e5e9f2] border-l-4 border-l-[#6d5dfc] bg-white p-6" id="deadlines">
       <SectionHeading eyebrow="DEADLINES" title={limit === undefined ? "All deadlines" : "Coming up"}>
@@ -40,5 +37,4 @@ function DeadlineSection({ deadlines, onRetry, limit }: DeadlineSectionProps) {
     </section>
   );
 }
-
 export default DeadlineSection;

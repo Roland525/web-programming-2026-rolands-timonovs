@@ -5,21 +5,18 @@ import SectionHeading from "../components/SectionHeading";
 import DeadlineSection from "../components/DeadlineSection";
 import WeatherCard from "../components/WeatherCard";
 import type { CurrentWeather, Deadline, LoadState, Project } from "../types";
-
 interface DashboardPageProps {
   projects: LoadState<Project[]>;
   deadlines: LoadState<Deadline[]>;
   weather: LoadState<CurrentWeather>;
   onRetryDeadlines: () => void;
 }
-
 function DashboardPage({ projects, deadlines, weather, onRetryDeadlines }: DashboardPageProps) {
   let activeCount = "…";
   if (projects.status === "error") activeCount = "–";
   if (projects.status === "success") {
     activeCount = String(projects.data.filter((project) => project.status === "active").length);
   }
-
   return (
     <>
       <title>Dashboard · CampusFlow</title>
@@ -42,5 +39,4 @@ function DashboardPage({ projects, deadlines, weather, onRetryDeadlines }: Dashb
     </>
   );
 }
-
 export default DashboardPage;

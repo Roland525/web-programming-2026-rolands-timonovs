@@ -4,21 +4,17 @@ import ProjectFilters from "./ProjectFilters";
 import ProjectList from "./ProjectList";
 import SectionHeading from "./SectionHeading";
 import AddProjectForm from "./AddProjectForm";
-
 interface ProjectSectionProps {
   projects: LoadState<Project[]>;
   onRetry: () => void;
   onAdd: (project: Project) => void;
 }
-
 function ProjectSection({ projects, onRetry, onAdd }: ProjectSectionProps) {
   const [filter, setFilter] = useState<ProjectFilter>("all");
-
   function handleAdd(project: Project): void {
     onAdd(project);
     setFilter("all");
   }
-
   return (
     <section id="projects" className="mx-auto w-full max-w-[1220px] px-[14px] py-[34px] pb-4 sm:px-5">
       <SectionHeading eyebrow="PROJECTS" title="Current work">
@@ -31,5 +27,4 @@ function ProjectSection({ projects, onRetry, onAdd }: ProjectSectionProps) {
     </section>
   );
 }
-
 export default ProjectSection;

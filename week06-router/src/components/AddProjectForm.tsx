@@ -3,41 +3,34 @@ import { CATEGORIES, type Project } from "../types";
 import { EMPTY_FORM, validate } from "../validation";
 import type { FieldName, FormErrors, FormValues } from "../validation";
 import Field from "./Field";
-
 interface AddProjectFormProps {
   disabled: boolean;
   onAdd: (project: Project) => void;
 }
-
 function AddProjectForm({ disabled, onAdd }: AddProjectFormProps) {
   const [values, setValues] = useState<FormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState("");
-
   function update(name: FieldName, value: string): void {
     setValues((current) => ({ ...current, [name]: value }));
     setErrors((current) => ({ ...current, [name]: undefined }));
     setMessage("");
   }
-
   function handleSubmit(event: SubmitEvent<HTMLFormElement>): void {
     event.preventDefault();
     if (disabled) return;
-
     const result = validate(values);
     if (!result.ok) {
       setErrors(result.errors);
       setMessage("");
       return;
     }
-
     const project = { ...result.project, id: crypto.randomUUID() };
     onAdd(project);
     setValues(EMPTY_FORM);
     setErrors({});
     setMessage(`"${project.title}" added.`);
   }
-
   return (
     <div id="addProject" className="mt-6 rounded-[18px] border border-[#e5e9f2] bg-white p-6 shadow-sm">
       <div className="mb-6">
@@ -124,5 +117,4 @@ function AddProjectForm({ disabled, onAdd }: AddProjectFormProps) {
     </div>
   );
 }
-
 export default AddProjectForm;

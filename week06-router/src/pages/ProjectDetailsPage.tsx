@@ -4,17 +4,14 @@ import Pill from "../components/Pill";
 import { daysUntil, formatDate } from "../date";
 import { categoryBadge, statusBadge, statusLabel, progressColor } from "../projectStyles";
 import type { LoadState, Project } from "../types";
-
 interface ProjectDetailsPageProps {
   projects: LoadState<Project[]>;
   onRetry: () => void;
 }
-
 function ProjectDetailsPage({ projects, onRetry }: ProjectDetailsPageProps) {
   const { projectId } = useParams();
   let content;
   let title = "Project · CampusFlow";
-
   if (projects.status === "loading") {
     content = <LoadingBox text="Loading project…" />;
   } else if (projects.status === "error") {
@@ -49,7 +46,6 @@ function ProjectDetailsPage({ projects, onRetry }: ProjectDetailsPageProps) {
       );
     }
   }
-
   return (
     <section className="mx-auto w-full max-w-[1220px] break-words px-[14px] py-[34px] sm:px-5">
       <title>{title}</title>
@@ -58,5 +54,4 @@ function ProjectDetailsPage({ projects, onRetry }: ProjectDetailsPageProps) {
     </section>
   );
 }
-
 export default ProjectDetailsPage;

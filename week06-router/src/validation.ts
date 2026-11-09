@@ -1,5 +1,4 @@
 import { CATEGORIES, type Category, type Project } from "./types";
-
 export interface FormValues {
   title: string;
   description: string;
@@ -7,10 +6,8 @@ export interface FormValues {
   dueDate: string;
   progress: string;
 }
-
 export type FieldName = keyof FormValues;
 export type FormErrors = Partial<Record<FieldName, string>>;
-
 export const EMPTY_FORM: FormValues = {
   title: "",
   description: "",
@@ -18,21 +15,17 @@ export const EMPTY_FORM: FormValues = {
   dueDate: "",
   progress: "",
 };
-
 export type ValidationResult =
   | { ok: true; project: Project }
   | { ok: false; errors: FormErrors };
-
 function isCategory(value: string): value is Category {
   return CATEGORIES.some((category) => category === value);
 }
-
 export function validate(values: FormValues): ValidationResult {
   const errors: FormErrors = {};
   const title = values.title.trim();
   const description = values.description.trim();
   const progress = Number(values.progress);
-
   if (title.length < 3) {
     errors.title = "Title must have at least 3 characters";
   }
@@ -48,11 +41,9 @@ export function validate(values: FormValues): ValidationResult {
   if (values.progress.trim() === "" || !Number.isInteger(progress) || progress < 0 || progress > 100) {
     errors.progress = "Progress must be a whole number from 0 to 100";
   }
-
   if (Object.keys(errors).length > 0 || !isCategory(values.category)) {
     return { ok: false, errors };
   }
-
   return {
     ok: true,
     project: {
