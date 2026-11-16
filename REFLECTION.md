@@ -2,7 +2,7 @@
 
 Aizpildiet šo daļu individuāli nodarbības beigās, **neizmantojot mākslīgā intelekta rīkus**.
 
-Ieteicamais kopējais apjoms: **aptuveni 200–300 vārdi**.
+Ieteicamais kopējais apjoms: **aptuveni 200-300 vārdi**.
 
 ---
 

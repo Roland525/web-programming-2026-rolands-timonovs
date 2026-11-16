@@ -1,4 +1,4 @@
-# CampusFlow — 6. nedēļa
+# CampusFlow - 6. nedēļa
 
 Atsevišķas lapas. App nosaka maršrutus. Layout rāda kopīgu galveni un kājeni. Pages mapē ir Dashboard, Projects, Deadlines, projekta detaļas un 404 lapa.
 

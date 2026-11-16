@@ -1,4 +1,4 @@
-# CampusFlow — 5. nedēļa
+# CampusFlow - 5. nedēļa
 
 Stāvoklis un forma. AddProjectForm glabā ievadīto tekstu. Validation.ts pārbauda laukus. App glabā pievienotos projektus, bet useLocalStorage tos saglabā pārlūkā.
 

@@ -1,4 +1,4 @@
-# CampusFlow — 3. nedēļa
+# CampusFlow - 3. nedēļa
 
 Dati no API. Projekti un termiņi nāk no JSON failiem. Api.ts saņem datus, guards.ts tos pārbauda, main.ts vada ielādi, bet render.ts rāda lapu.
 

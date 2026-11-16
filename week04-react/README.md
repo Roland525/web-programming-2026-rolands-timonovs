@@ -1,4 +1,4 @@
-# CampusFlow — 4. nedēļa
+# CampusFlow - 4. nedēļa
 
 React komponentes. Lapa sadalīta komponentēs. Main.tsx ielādē datus un nodod tos App ar props. Filtrs un mobilā izvēlne izmanto useState.
 

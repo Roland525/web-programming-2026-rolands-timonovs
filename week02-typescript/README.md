@@ -1,4 +1,4 @@
-# CampusFlow — 2. nedēļa
+# CampusFlow - 2. nedēļa
 
 CampusFlow lapa ar TypeScript, Tailwind CSS un datiem no `localStorage`.
 

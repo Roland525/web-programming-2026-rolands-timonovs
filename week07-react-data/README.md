@@ -1,4 +1,4 @@
-# CampusFlow — 7. nedēļa
+# CampusFlow - 7. nedēļa
 
 Datu ielāde React. UseFetch ielādē datus un atceļ veco pieprasījumu. App ielādē projektus un termiņus. WeatherCard ielādē laikapstākļus. Main.tsx tikai palaiž lietotni.
 
