@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router";
 import { EmptyBox, ErrorBox, LoadingBox } from "../components/StateBox";
+import { renderRichText } from "../richText";
 import Pill from "../components/Pill";
 import { daysUntil, formatDate } from "../date";
 import { categoryBadge, statusBadge, statusLabel, progressColor } from "../projectStyles";
@@ -36,7 +37,7 @@ function ProjectDetailsPage({ projects, onRetry }: ProjectDetailsPageProps) {
             <Pill className={statusBadge[project.status]}>{statusLabel[project.status]}</Pill>
           </div>
           <h1 className="mt-6 text-3xl font-bold">{project.title}</h1>
-          <p className="my-5 text-sm text-[#6c7485]">{project.description}</p>
+          <p className="my-5 text-sm text-[#6c7485]">{renderRichText(project.description)}</p>
           <p className="text-sm">{dueText}</p>
           <p className="mb-2 mt-5 text-sm font-bold">{project.progress}% complete</p>
           <div className="h-[7px] overflow-hidden rounded-full bg-[#eceef4]">
