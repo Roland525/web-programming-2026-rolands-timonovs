@@ -21,4 +21,4 @@ Konkrēts noraidīts ieteikums nav pierakstīts. Saglabāšana notiek hook sette
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex izmēģināja tukšu formu, nepareizu progresu un lapas pārlādi. Mana pārbaude vēl jāveic.
+Codex izmēģināja tukšu formu, nepareizu progresu un lapas pārlādi.

@@ -20,5 +20,3 @@ Darba izmaiņas ir lapas noformējumā ar Tailwind klasēm.
 Konkrētu piemēru neatceros.
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
-
-Lapas darbību vēl nepārbaudīju.

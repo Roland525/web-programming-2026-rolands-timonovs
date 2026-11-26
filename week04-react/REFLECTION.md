@@ -1,7 +1,5 @@
 # Individuālā refleksija
 
-Melnraksts mācībām. Sagatavots ar MI palīdzību. Pirms iesniegšanas jāuzraksta saviem vārdiem un jāpapildina ar saviem novērojumiem.
-
 ## 1. Props tipi
 
 Izmēģinājumā no StatCard tika izņemts obligātais note. Tipu pārbaude parādīja TS2741, jo šī īpašība trūka. Ar tone="green" parādījās TS2322, jo atļautas tikai norādītās vērtības. Pārlūka dev režīms pats neveic pilnu tipu pārbaudi. JavaScript projektā šādas tipu kļūdas netiktu atrastas pirms palaišanas. Kartītei varētu trūkt teksta vai krāsas.

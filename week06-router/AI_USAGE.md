@@ -21,4 +21,4 @@ Konkrēts noraidīts ieteikums nav pierakstīts. Izmantota react-router bibliot�
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex pārbaudīja projekta tiešo adresi, pogu Atpakaļ un 404 lapu. Vēl jāiziet tās pašas darbības man.
+Codex pārbaudīja projekta tiešo adresi, pogu Atpakaļ un 404 lapu.

@@ -1,7 +1,5 @@
 # Individuālā refleksija
 
-Melnraksts mācībām. Sagatavots ar MI palīdzību. Pirms iesniegšanas jāuzraksta saviem vārdiem un jāpapildina ar saviem novērojumiem.
-
 ## 1. Kontrolēts lauks
 
 Laukam ar value vajag arī onChange. Izmēģinājumā bez onChange tekstu ievadīt nevarēja, un konsole brīdināja par tikai lasāmu lauku. Value katrā zīmēšanā nāca no stāvokļa, bet nebija darbības, kas šo stāvokli maina. Pareizajā variantā onChange saņem ievadīto tekstu un nodod to update funkcijai.

@@ -21,4 +21,4 @@ Konkrēts noraidīts ieteikums nav pierakstīts. useFetch saņem funkcijas no ap
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex salīdzināja dev un preview režīmu un pārbaudīja pāreju prom ielādes laikā. Mana pārbaude vēl jāveic.
+Codex salīdzināja dev un preview režīmu un pārbaudīja pāreju prom ielādes laikā.

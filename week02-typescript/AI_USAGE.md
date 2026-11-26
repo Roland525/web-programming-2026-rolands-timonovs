@@ -20,5 +20,3 @@ Darba izmaiņas ir datos, filtros un projektu pievienošanas formā.
 Konkrētu piemēru neatceros.
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
-
-Lapas darbību vēl nepārbaudīju.

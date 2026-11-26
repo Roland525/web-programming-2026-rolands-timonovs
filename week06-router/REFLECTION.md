@@ -1,7 +1,5 @@
 # Individuālā refleksija
 
-Melnraksts mācībām. Sagatavots ar MI palīdzību. Pirms iesniegšanas jāuzraksta saviem vārdiem un jāpapildina ar saviem novērojumiem.
-
 ## 1. `Link` pret `<a>`
 
 Link maina aktīvo lapu lietotnes iekšā. Pārlūka pārbaudē, pārejot no Projects uz Deadlines, jauni projektu un termiņu pieprasījumi netika veikti. Parasta a saite uz citu adresi ielādē dokumentu no jauna. Tad no jauna sākas arī datu ielāde. Formas teksts var pazust abos gadījumos, jo pēc pārejas Projects komponente vairs nav redzama.

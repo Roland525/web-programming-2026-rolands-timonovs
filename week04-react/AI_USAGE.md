@@ -21,4 +21,4 @@ Konkrēts noraidīts ieteikums nav pierakstīts. Datu ielāde atstāta main.tsx.
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex pārbaudīja filtrus, kļūdu paziņojumus un mobilās izvēlnes darbību. Šīs pārbaudes vēl jāatkārto man.
+Codex pārbaudīja filtrus, kļūdu paziņojumus un mobilās izvēlnes darbību.

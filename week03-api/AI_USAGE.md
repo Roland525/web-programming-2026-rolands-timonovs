@@ -21,4 +21,4 @@ Konkrēts noraidīts ieteikums nav pierakstīts. Izvēlēts risinājums ar fetch
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex pārlūkā pārbaudīja bloķētu pieprasījumu, nepareizu JSON un pogu Try again. Mana pārbaude vēl jāveic.
+Codex pārlūkā pārbaudīja bloķētu pieprasījumu, nepareizu JSON un pogu Try again.

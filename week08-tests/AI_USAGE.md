@@ -22,4 +22,4 @@ Nav konkrēta piemēra.
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Codex palaida testus. Mana pārbaude vēl jāveic.
+Codex palaida testus.

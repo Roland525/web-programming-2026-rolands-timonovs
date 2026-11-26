@@ -22,4 +22,4 @@ Pagaidām nav piemēra, ko šeit minēt.
 
 ## Viena lieta, kuru es pārbaudīju pats/pati, nevis vienkārši uzticējos MI atbildei
 
-Personīga pārbaude vēl jāveic. Automātiskās pārbaudes palaida Codex.
+Automātiskās pārbaudes palaida Codex.

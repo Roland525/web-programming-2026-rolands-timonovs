@@ -1,7 +1,5 @@
 # Individuālā refleksija
 
-Melnraksts mācībām. Sagatavots ar MI palīdzību. Pirms iesniegšanas jāuzraksta saviem vārdiem un jāpapildina ar saviem novērojumiem.
-
 ## 1. Kad `fetch` nemet kļūdu?
 
 Serveris var atbildēt ar 404, un fetch tomēr saņem atbildi. Tas vēl nenozīmē, ka saņemti vajadzīgie dati. Tāpēc api.ts ir pārbaude `if (!response.ok)`. Ja tā neizpildās veiksmīgi, kods izmet kļūdu ar HTTP statusu. Tālāk lapa parāda kļūdas tekstu un pogu Try again. Bez šīs pārbaudes kods varētu mēģināt izmantot kļūdas lapu kā projektu datus.

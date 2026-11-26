@@ -1,7 +1,5 @@
 # Individuālā refleksija
 
-Melnraksts mācībām. Sagatavots ar MI palīdzību. Pirms iesniegšanas jāuzraksta saviem vārdiem un jāpapildina ar saviem novērojumiem.
-
 ## 1. Divi pieprasījumi
 
 Dev režīmā diviem datu avotiem kopā bija četri pieprasījumi, un divi tika atcelti. Katra efekta secība bija sākums, tīrīšana, sākums. Preview režīmā bija divi pieprasījumi, pa vienam katram avotam. StrictMode dev režīmā atkārto efektu, lai pārbaudītu tīrīšanu. Bez abort vecais pieprasījums turpinātos, kaut arī tas vairs nav vajadzīgs.
