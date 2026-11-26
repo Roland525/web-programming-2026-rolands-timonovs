@@ -1,7 +1,8 @@
 # Mākslīgā intelekta izmantošana
 
-**Vārds, uzvārds:** Rolands Timonovs  
-**Izmantotais(-ie) MI rīks(-i):** Codex  
+**Vārds, uzvārds:** Rolands Timonovs
+
+**Izmantotais(-ie) MI rīks(-i):** Codex
 
 ## Kam es izmantoju mākslīgo intelektu?
 
