@@ -1,0 +1,38 @@
+# Šis fails atrodas REPOZITORIJA SAKNĒ: .github/workflows/week08-tests.yml
+# (nevis mapē week08-tests). GitHub darbplūsmas meklē tikai šeit.
+name: week08-tests
+
+# Kad palaist: katrā push uz jebkuru zaru un katrā pull request.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    # Visas `run` komandas izpildās mapē week08-tests (uz `uses` soļiem tas neattiecas).
+    defaults:
+      run:
+        working-directory: week08-tests
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check and build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
