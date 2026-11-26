@@ -5,8 +5,7 @@ export function formatDate(date: string): string {
   });
 }
 
-export function daysUntil(date: string): number {
-  const today = new Date();
+export function daysUntil(date: string, today = new Date()): number {
   const currentDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
   const deadline = new Date(`${date}T00:00:00`);
   return Math.round((deadline.getTime() - currentDay.getTime()) / (1000 * 60 * 60 * 24));
